@@ -390,6 +390,7 @@ export default function App() {
                 relative p-8 w-full min-h-screen
             "
             onClick={handleRedirect1} 
+            onTouchStart={handleRedirect1}
         >
             {/* Background */}
             <div
