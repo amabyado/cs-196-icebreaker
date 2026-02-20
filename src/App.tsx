@@ -374,9 +374,8 @@ export default function App() {
     }, [enteredEmail, showModal1, showModal2, showEmailModal]);
 
     const handleRedirect1 = () => {
-        const randomization = Math.random() * (1 - 0.7) + 0.7;
 
-        if (randomization > 0.9) {
+        if (Math.random() < 0.1) {
             window.location.href = "https://dcs.upd.edu.ph/";
         }
     };
