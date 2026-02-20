@@ -112,6 +112,7 @@ export function PrimaryButton({
                 rounded-lg
                 ${backgroundClasses.base} ${backgroundClasses.hover}
                 heading-s text-neutral-50
+                shadow-md
                 hover:-translate-y-0.5
                 transition-standard cursor-pointer neutral-50space-nowrap
             `}
@@ -596,7 +597,7 @@ export default function App() {
                         className="
                             w-full h-full 
                             rounded-lg 
-                            shadow-xl
+                            shadow-lg
                         "
                         alt="Free iPhone 17 Pro Max"
                     />
@@ -655,6 +656,7 @@ export default function App() {
                     className="
                         mt-4 mb-4
                         text-center heading-m text-neutral-950
+                        animate-ping
                     "
                 >
                     4 VIRUSES DETECTED
@@ -704,7 +706,8 @@ export default function App() {
                     {
                         label: "Unlock Full Access",
                         color: "green",
-                        onClick: () => setShowEmailModal(false),
+                        onClick: () => {
+                            setShowEmailModal(false)},
                     },
                     {
                         label: "I prefer incomplete and less high-quality materials.",
