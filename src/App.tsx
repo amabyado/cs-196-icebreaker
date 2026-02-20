@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 import "./App.css";
 import { PopUpOverlay } from "./components/PopUpOverlay";
 import Star from "./icons/Star";
@@ -154,7 +155,7 @@ export function Card({ children }: { children: React.ReactNode }) {
     );
 }
 
-function CredentialCard({
+export function CredentialCard({
     text,
     logo,
 }: {
@@ -177,7 +178,7 @@ function CredentialCard({
     );
 }
 
-function Credentials() {
+export function Credentials() {
     return (
         <div className="">
             <h3
@@ -209,7 +210,7 @@ function Credentials() {
     );
 }
 
-function TestimonialCard({
+export function TestimonialCard({
     text,
     person,
     image,
@@ -255,7 +256,7 @@ function TestimonialCard({
     );
 }
 
-function Testimonials() {
+export function Testimonials() {
     return (
         <div className="">
             <h3
@@ -296,7 +297,7 @@ type ModalAction = {
     onClick: () => void;
 };
 
-function Modal({
+export function Modal({
     visible,
     title,
     children,
@@ -392,6 +393,8 @@ export default function App() {
             onClick={handleRedirect1} 
             onTouchStart={handleRedirect1}
         >
+            <Toaster/>
+
             {/* Background */}
             <div
                 className="absolute inset-0 z-0"
@@ -564,7 +567,7 @@ export default function App() {
                         href="/CS 196 Presentation.pdf"
                         download
                     >
-                        <TertiaryButton onClick={() => alert("Let's begin!")}>
+                        <TertiaryButton onClick={() => toast.success("Let's begin the report!")}>
                             Download
                         </TertiaryButton>
                     </a>
@@ -734,7 +737,9 @@ export default function App() {
                         if (event.key === "Enter") {
                             const input = event.target as HTMLInputElement; 
 
-                            alert(`Email entered: ${input.value}`);
+                            toast(`Email entered: ${input.value}`, {
+                                icon: '📧',
+                            });
 
                             setEnteredEmail(true);
                         }
