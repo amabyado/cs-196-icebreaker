@@ -266,6 +266,7 @@ export function Testimonials() {
             <h3
                 className="
                     mb-4
+                    text-center heading-m
                     text-transparent
                     bg-linear-to-b from-primary-600 to-primary-800 
                     bg-clip-text
