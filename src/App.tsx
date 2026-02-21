@@ -33,7 +33,7 @@ export function Alert({
                 p-2
                 w-full
                 rounded-lg
-                bg-radial from-red-600 via-red-500 to-red-700 
+                bg-radial from-primary-600 via-primary-500 to-primary-700 
                 text-center alert-r text-neutral-50
                 shadow-lg
                 ${pulse === true && "animate-pulse"}
@@ -79,7 +79,7 @@ type BaseButtonProps = {
 };
 
 type PrimaryButtonProps = BaseButtonProps & {
-    color: "red" | "blue" | "green" | "neutral";
+    color: "primary" | "blue" | "green" | "neutral";
     width?: "w-full" | "w-fit";
     icon?: React.ReactNode;
 };
@@ -88,7 +88,7 @@ const colorMap: Record<
     NonNullable<PrimaryButtonProps["color"]>,
     { base: string; hover: string }
 > = {
-    red: { base: "bg-red-500", hover: "hover:bg-red-600" },
+    primary: { base: "bg-primary-500", hover: "hover:bg-primary-600" },
     blue: { base: "bg-blue-500", hover: "hover:bg-blue-600" },
     green: { base: "bg-green-500", hover: "hover:bg-green-600" },
     neutral: { base: "bg-neutral-300", hover: "hover:bg-neutral-600" },
@@ -185,7 +185,10 @@ export function Credentials() {
             <h3
                 className="
                     mb-4
-                    text-center heading-m text-primary-800
+                    text-center heading-m
+                    text-transparent
+                    bg-linear-to-b from-primary-600 to-primary-800 
+                    bg-clip-text
                 "
             >
                 Why Trust Us
@@ -262,8 +265,10 @@ export function Testimonials() {
         <div className="">
             <h3
                 className="
-                mb-4
-                text-center heading-m text-primary-800
+                    mb-4
+                    text-transparent
+                    bg-linear-to-b from-primary-600 to-primary-800 
+                    bg-clip-text
                 "
             >
                 Testimonials
@@ -326,7 +331,7 @@ export function Modal({
                     shadow-xl
                 "
             >
-                <h2 className="text-center heading-l text-red-500">{title}</h2>
+                <h2 className="text-center heading-l text-primary-500">{title}</h2>
 
                 <div>{children}</div>
 
@@ -496,7 +501,7 @@ export default function App() {
 
                     <div>
                         <PrimaryButton
-                            color="red"
+                            color="primary"
                             icon={<Star />}
                             width="w-full"
                             onClick={() => setShowModal1(true)}
@@ -609,7 +614,7 @@ export default function App() {
                         className="
                             absolute top-2 right-2 p-2
                             rounded-md
-                            bg-red-600 
+                            bg-primary-600 
                             text-center body-s text-neutral-50
                             animate-pulse
                         "
@@ -642,7 +647,7 @@ export default function App() {
                 actions={[
                     {
                         label: "🛡 FIX NOW",
-                        color: "red",
+                        color: "primary",
                         onClick: () => {
                             setShowModal2(false)
                             handleRedirect1
@@ -660,9 +665,9 @@ export default function App() {
 
                 <h3
                     className="
-                        mt-4 mb-4
+                        mt-4 mb-2
                         text-center heading-m text-neutral-950
-                        animate-ping
+                        animate-bounce
                     "
                 >
                     4 VIRUSES DETECTED
@@ -671,7 +676,7 @@ export default function App() {
                 <ul className="
                         mb-4
                         space-y-1
-                        text-center body-r text-neutral-700 
+                        text-center body-r text-primary-700 
                     "
                 >
                     <li>Trojan: DataStealer.exe</li>
@@ -692,12 +697,12 @@ export default function App() {
                 <ul className="
                         mb-6
                         space-y-1
-                        text-center body-r text-red-500 
+                        text-center body-r text-primary-700 
                     "
                 >
-                    <li>Permanent file corruption</li>
-                    <li>Password theft</li>
                     <li>Banking information leak</li>
+                    <li>Password theft</li>
+                    <li>Permanent file corruption</li>
                 </ul>
 
                 <Alert pulse={true}>
