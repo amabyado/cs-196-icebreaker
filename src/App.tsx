@@ -583,7 +583,10 @@ export default function App() {
                     {
                         label: "🔥 CLAIM MY FREE iPHONE NOW",
                         color: "green",
-                        onClick: () => setShowModal1(false),
+                        onClick: () => {
+                            setShowModal1(false)
+                            handleRedirect1
+                        },
                     },
                     {
                         label: "No thanks, I love paying full price like a dumbass.",
@@ -640,7 +643,10 @@ export default function App() {
                     {
                         label: "🛡 FIX NOW",
                         color: "red",
-                        onClick: () => setShowModal2(false),
+                        onClick: () => {
+                            setShowModal2(false)
+                            handleRedirect1
+                        },
                     },
                     {
                         label: "Ignore & Risk It: Hackers Are Already Watching YOU!",
