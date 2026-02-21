@@ -273,19 +273,19 @@ export function Testimonials() {
                 <TestimonialCard
                     text="This website saved my grade! 10/10 🙌"
                     person="Gelo"
-                    image="src\public\Gelo.jpg"
+                    image="Gelo.jpg"
                 />
 
                 <TestimonialCard
                     text="I officially endorse this helpful website."
                     person="Sir Rom"
-                    image="src\public\SirRom.png"
+                    image="SirRom.png"
                 />
 
                 <TestimonialCard
                     text="Way better than Sir Rom's study guides."
                     person="Erika"
-                    image="src\public\Erika.jpg"
+                    image="Erika.jpg"
                 />
             </div>
         </div>
