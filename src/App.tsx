@@ -596,7 +596,7 @@ export default function App() {
             >
                 <div className="relative mb-4">
                     <img
-                        src="src/assets/iphone.jpg"
+                        src="iphone.jpg"
                         className="
                             w-full h-full 
                             rounded-lg 
