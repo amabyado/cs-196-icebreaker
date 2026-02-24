@@ -1,365 +1,17 @@
 import React, { useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import "./App.css";
-import { PopUpOverlay } from "./components/PopUpOverlay";
 import Star from "./icons/Star";
 import RunningPerson from "./icons/RunningPerson";
 import Shield from "./icons/Shield";
-import Notebook from "./icons/Notebook";
-import Blackboard from "./icons/Blackboard";
-import School from "./icons/School";
-
-export function Emphasis({ text }: {text: string }) {
-    return <span 
-        className="
-            text-transparent
-            bg-linear-to-r from-accent-300 to-accent-500 
-            bg-clip-text
-        "
-    >
-        {text}
-    </span>;
-}
-export function Alert({
-    children,
-    pulse,
-}: {
-    children: React.ReactNode;
-    pulse?: boolean;
-}) {
-    return (
-        <div
-            className={`
-                p-2
-                w-full
-                rounded-lg
-                bg-radial from-primary-600 via-primary-500 to-primary-700 
-                text-center alert-r text-neutral-50
-                shadow-lg
-                ${pulse === true && "animate-pulse"}
-            `}
-        >
-            {children}
-        </div>
-    );
-}
-
-function UrgencyScarcityBanner() {
-    const [time, setTime] = useState(119);
-    
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setTime((time) => (time > 0 ? time - 1 : 0));
-        }, 1000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const minutes = Math.floor(time / 60);
-    const seconds = time % 60;
-
-    return (
-        <Alert pulse={true}>
-            🚨 WARNING: ONLY
-            {" "}
-            <span className="underline">2 DOWNLOADS</span>
-            {" "}
-            LEFT — LOCKING IN
-            {" "}
-            <Emphasis text={`0${minutes}:${seconds.toString().padStart(2, "0")}`} />
-            {" "}
-            ⏳
-        </Alert>
-    );
-}
-
-type BaseButtonProps = {
-    children: React.ReactNode;
-    onClick: () => void;
-};
-
-type PrimaryButtonProps = BaseButtonProps & {
-    color: "primary" | "blue" | "green" | "neutral";
-    width?: "w-full" | "w-fit";
-    icon?: React.ReactNode;
-};
-
-const colorMap: Record<
-    NonNullable<PrimaryButtonProps["color"]>,
-    { base: string; hover: string }
-> = {
-    primary: { base: "bg-primary-500", hover: "hover:bg-primary-600" },
-    blue: { base: "bg-blue-500", hover: "hover:bg-blue-600" },
-    green: { base: "bg-green-500", hover: "hover:bg-green-600" },
-    neutral: { base: "bg-neutral-300", hover: "hover:bg-neutral-600" },
-};
-
-export function PrimaryButton({
-    children,
-    onClick,
-    color,
-    width,
-    icon,
-}: PrimaryButtonProps) {
-    const backgroundClasses = colorMap[color];
-
-    return (
-        <button
-            className={`
-                px-4 py-2
-                flex justify-center items-center gap-2
-                ${width ?? "w-fit"}
-                rounded-lg
-                ${backgroundClasses.base} ${backgroundClasses.hover}
-                heading-s text-neutral-50
-                shadow-md
-                hover:-translate-y-0.5
-                transition-standard cursor-pointer neutral-50space-nowrap
-            `}
-            onClick={onClick}
-        >
-            {icon && <span>{icon}</span>}
-
-            {children}
-        </button>
-    );
-}
-
-export function TertiaryButton({ children, onClick }: BaseButtonProps) {
-    return (
-        <button
-            className="
-                body-r underline text-neutral-500 hover:text-neutral-700 
-                transition-standard
-            "
-            onClick={onClick}
-        >
-            {children}
-        </button>
-    );
-}
-
-export function Card({ children }: { children: React.ReactNode }) {
-    return (
-        <div
-            className="
-                p-4
-                flex flex-col justify-center items-center
-                w-full 
-                border border-neutral-300 rounded-lg 
-                bg-neutral-50
-                shadow-md
-            "
-        >
-            {children}
-        </div>
-    );
-}
-
-export function CredentialCard({
-    text,
-    logo,
-}: {
-    text: string;
-    logo?: React.ReactNode;
-}) {
-    return (
-        <Card>
-            {logo}
-
-            <p
-                className="
-                    mt-2 
-                    text-center body-l text-primary-800
-                "
-            >
-                {text}
-            </p>
-        </Card>
-    );
-}
-
-export function Credentials() {
-    return (
-        <div className="">
-            <h3
-                className="
-                    mb-4
-                    text-center heading-m
-                    text-transparent
-                    bg-linear-to-b from-primary-600 to-primary-800 
-                    bg-clip-text
-                "
-            >
-                Why Trust Us
-            </h3>
-
-            <div className="flex flex-col sm:flex-row items-center gap-4">
-                <CredentialCard
-                    text="Trusted by 200+ Students"
-                    logo={<Notebook className="text-primary-950 w-12 h-12" />}
-                />
-
-                <CredentialCard
-                    text="Backed by 10+ Professors"
-                    logo={<Blackboard className="text-primary-950 w-12 h-12" />}
-                />
-
-                <CredentialCard
-                    text="An Official DCS Partner"
-                    logo={<School className="text-primary-950 w-12 h-12" />}
-                />
-            </div>
-        </div>
-    );
-}
-
-export function TestimonialCard({
-    text,
-    person,
-    image,
-}: {
-    text: string;
-    person: string;
-    image?: string;
-}) {
-    return (
-        <Card>
-            <div>
-                {image && (
-                    <img
-                        src={image}
-                        width="500"
-                        className="
-                            w-full h-full 
-                            rounded-lg
-                        "
-                        alt="Testimonial"
-                    />
-                )}
-            </div>
-
-            <p
-                className="
-                    mt-2 
-                    text-center body-l text-primary-800
-                "
-            >
-                {person}
-            </p>
-
-            <p
-                className="
-                    mt-1
-                    text-center body-r text-neutral-700
-                "
-            >
-                {text}
-            </p>
-        </Card>
-    );
-}
-
-export function Testimonials() {
-    return (
-        <div className="">
-            <h3
-                className="
-                    mb-4
-                    text-center heading-m
-                    text-transparent
-                    bg-linear-to-b from-primary-600 to-primary-800 
-                    bg-clip-text
-                "
-            >
-                Testimonials
-            </h3>
-
-            <div className="flex flex-col sm:flex-row items-start gap-4">
-                <TestimonialCard
-                    text="This website saved my grade! 10/10 🙌"
-                    person="Gelo"
-                    image="Gelo.jpg"
-                />
-
-                <TestimonialCard
-                    text="I officially endorse this helpful website."
-                    person="Sir Rom"
-                    image="SirRom.png"
-                />
-
-                <TestimonialCard
-                    text="Way better than Sir Rom's study guides."
-                    person="Erika"
-                    image="Erika.jpg"
-                />
-            </div>
-        </div>
-    );
-}
-
-type ModalAction = {
-    label: string;
-    color?: PrimaryButtonProps["color"];
-    onClick: () => void;
-};
-
-export function Modal({
-    visible,
-    title,
-    children,
-    actions,
-}: {
-    visible: boolean;
-    title: string;
-    children: React.ReactNode;
-    actions: ModalAction[];
-}) {
-    if (!visible) return null;
-
-    return (
-        <>
-            <PopUpOverlay />
-
-            <div
-                className="
-                    fixed top-1/2 left-1/2 z-60 transform -translate-x-1/2 -translate-y-1/2 
-                    p-10
-                    flex flex-col justify-center items-center gap-6
-                    w-[90vw] max-w-lg
-                    rounded-4xl
-                    bg-neutral-50 
-                    shadow-xl
-                "
-            >
-                <h2 className="text-center heading-l text-primary-500">{title}</h2>
-
-                <div>{children}</div>
-
-                <div className="flex flex-col justify-center items-center gap-2">
-                    {actions.map((action, index) =>
-                        action.color !== undefined ? (
-                            <PrimaryButton
-                                key={index}
-                                color={action.color}
-                                onClick={action.onClick}
-                            >
-                                {action.label}
-                            </PrimaryButton>
-                        ) : (
-                            <TertiaryButton
-                                key={index}
-                                onClick={action.onClick}
-                            >
-                                {action.label}
-                            </TertiaryButton>
-                        ),
-                    )}
-                </div>
-            </div>
-        </>
-    );
-}
+import UrgencyScarcityBanner from "./components/UrgencyScarcityBanner";
+import PrimaryButton from "./components/PrimaryButton";
+import { Credentials } from "./cards/Credentials";
+import { Testimonials } from "./cards/Testimonials";
+import TertiaryButton from "./components/TertiaryButton";
+import Modal from "./modals/Modal";
+import Alert from "./components/Alert";
+import Emphasis from "./components/Emphasis";
 
 export default function App() {
     const [showModal1, setShowModal1] = useState(false);
@@ -591,7 +243,7 @@ export default function App() {
                         color: "green",
                         onClick: () => {
                             setShowModal1(false)
-                            handleRedirect1
+                            handleRedirect1()
                         },
                     },
                     {
@@ -651,7 +303,7 @@ export default function App() {
                         color: "primary",
                         onClick: () => {
                             setShowModal2(false)
-                            handleRedirect1
+                            handleRedirect1()
                         },
                     },
                     {
@@ -719,7 +371,7 @@ export default function App() {
                         label: "Unlock Full Access",
                         color: "green",
                         onClick: () => {
-                            setShowEmailModal(false)},
+                            {setShowEmailModal(false)}},
                     },
                     {
                         label: "I prefer incomplete and less high-quality materials.",
