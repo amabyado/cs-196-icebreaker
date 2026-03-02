@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from 'react-hot-toast';
 import "./App.css";
 import Star from "./icons/Star";
@@ -9,9 +9,9 @@ import PrimaryButton from "./components/PrimaryButton";
 import { Credentials } from "./cards/Credentials";
 import { Testimonials } from "./cards/Testimonials";
 import TertiaryButton from "./components/TertiaryButton";
-import Modal from "./modals/Modal";
-import Alert from "./components/Alert";
-import Emphasis from "./components/Emphasis";
+import Modal3 from "./modals/Modal3";
+import Modal2 from "./modals/Modal2";
+import Modal1 from "./modals/Modal1";
 
 export default function App() {
     const [showModal1, setShowModal1] = useState(false);
@@ -234,185 +234,24 @@ export default function App() {
             </div>
 
             {/* Modals */}
-            <Modal
-                visible={showModal1}
-                title="🎊 YOU'VE BEEN PICKED"
-                actions={[
-                    {
-                        label: "🔥 CLAIM MY FREE iPHONE NOW",
-                        color: "green",
-                        onClick: () => {
-                            setShowModal1(false)
-                            handleRedirect1()
-                        },
-                    },
-                    {
-                        label: "No thanks, I love paying full price like a dumbass.",
-                        onClick: () => setShowModal1(false),
-                    },
-                ]}
-            >
-                <div className="relative mb-4">
-                    <img
-                        src="iphone.jpg"
-                        className="
-                            w-full h-full 
-                            rounded-lg 
-                            shadow-lg
-                        "
-                        alt="Free iPhone 17 Pro Max"
-                    />
 
-                    <div
-                        className="
-                            absolute top-2 right-2 p-2
-                            rounded-md
-                            bg-primary-600 
-                            text-center body-s text-neutral-50
-                            animate-pulse
-                        "
-                    >
-                        ONLY 1 LEFT
-                    </div>
-                </div>
+            <Modal1
+                showModal1={showModal1}
+                setShowModal1={setShowModal1}
+                handleRedirect1={handleRedirect1}
+            />
 
-                <Alert>
-                    You've been randomly selected to receive a
-                    {" "}
-                    <Emphasis text={"100% FREE"} />
-                    {" "}
-                    iPhone 17 Pro Max!
-                </Alert>
+            <Modal2
+                showModal2={showModal2}
+                setShowModal2={setShowModal2}
+                handleRedirect1={handleRedirect1}
+            />
 
-                <p
-                    className="
-                        mt-2
-                        text-center body-l text-neutral-700
-                    "
-                >
-                    Hurry!!!!! If you don't act NOW, you'll NEVER get this again.
-                </p>
-            </Modal>
-
-            <Modal
-                visible={showModal2}
-                title="⚠ CRITICAL SECURITY ALERT ⚠"
-                actions={[
-                    {
-                        label: "🛡 FIX NOW",
-                        color: "primary",
-                        onClick: () => {
-                            setShowModal2(false)
-                            handleRedirect1()
-                        },
-                    },
-                    {
-                        label: "Ignore & Risk It: Hackers Are Already Watching YOU!",
-                        onClick: () => setShowModal2(false),
-                    },
-                ]}
-            >
-                <Alert pulse={true}>
-                    SYSTEM COMPROMISED
-                </Alert>
-
-                <h3
-                    className="
-                        mt-4 mb-2
-                        text-center heading-m text-neutral-950
-                        animate-bounce
-                    "
-                >
-                    4 VIRUSES DETECTED
-                </h3>
-                    
-                <ul className="
-                        mb-4
-                        space-y-1
-                        text-center body-r text-primary-700 
-                    "
-                >
-                    <li>Trojan: DataStealer.exe</li>
-                    <li>Spyware: KeyLogger-X</li>
-                    <li>Ransomware: CryptoLock Variant</li>
-                    <li>Adware Injection Script</li>
-                </ul>
-
-                <p
-                    className="
-                        mb-2 
-                        text-center body-l text-neutral-900
-                    "
-                >
-                    Immediate Action Required to Prevent:
-                </p>
-
-                <ul className="
-                        mb-6
-                        space-y-1
-                        text-center body-r text-primary-700 
-                    "
-                >
-                    <li>Banking information leak</li>
-                    <li>Password theft</li>
-                    <li>Permanent file corruption</li>
-                </ul>
-
-                <Alert pulse={true}>
-                    Upgrade to premium to remove threat
-                </Alert>
-            </Modal>
-
-            <Modal
-                visible={showEmailModal}
-                title="Wait!"
-                actions={[
-                    {
-                        label: "Unlock Full Access",
-                        color: "green",
-                        onClick: () => {
-                            {setShowEmailModal(false)}},
-                    },
-                    {
-                        label: "I prefer incomplete and less high-quality materials.",
-                        onClick: () => setShowEmailModal(false),
-                    },
-                ]}
-            >
-                <p
-                    className="
-                        mb-4
-                        text-center body-l text-neutral-700
-                    "
-                >
-                    Before you download, enter your email to unlock the <strong>FULL VERSION</strong>.
-                </p>
-
-                <input 
-                    type="email" 
-                    placeholder="Enter your email now!" 
-                    className="
-                        px-4 py-2
-                        flex justify-start items-center 
-                        w-full
-                        border border-neutral-500 hover:border-neutral-700 outline-none focus:ring-2 focus:ring-neutral-200 rounded-lg
-                        bg-neutral-50
-                        body-r text-neutral-500
-                        transition-standard
-                    "
-                    onKeyDown={(event: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (event.key === "Enter") {
-                            const input = event.target as HTMLInputElement; 
-
-                            toast(`Email entered: ${input.value}`, {
-                                icon: '📧',
-                            });
-
-                            setEnteredEmail(true);
-                        }
-                    }}
-                />
-            </Modal>
+            <Modal3 
+                showEmailModal={showEmailModal} 
+                setShowEmailModal={setShowEmailModal} 
+                setEnteredEmail={setEnteredEmail} 
+            />
         </div>
     );
 }
