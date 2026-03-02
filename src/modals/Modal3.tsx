@@ -26,7 +26,7 @@ export default function Modal3({
             setEnteredEmail(true);
             setShowEmailModal(false);
         } else {
-            toast.error("Please enter a valid UP email ending with @up.edu.ph");
+            toast.error("Please enter a valid UP mail (ending with @up.edu.ph).");
         }
     };
 
